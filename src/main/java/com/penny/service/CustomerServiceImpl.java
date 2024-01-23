@@ -73,4 +73,12 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.update(id, myCustomer.getName(), myCustomer.getEmail(), myCustomer.getAge());
         return myCustomer;
     }
+
+    @Override
+    public void deleteById(long id) {
+        boolean isDeleted = customerRepository.deleteById(id);
+        if(!isDeleted) {
+            throw new RequestValidationException("Delete error, please check Id and try again");
+        }
+    }
 }

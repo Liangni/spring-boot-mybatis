@@ -15,4 +15,6 @@ public interface CustomerService
     Customer getByEmail(String email);
 
     Customer update(long id, Customer customer);
+
+    void deleteById(long id);
 }

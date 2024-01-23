@@ -1,10 +1,7 @@
 package com.penny.repository;
 
 import com.penny.model.Customer;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +25,7 @@ public interface CustomerRepository {
             " email = #{email}, age = #{age} WHERE id=#{id}"
     )
     void update(long id, String name, String email, int age);
+
+    @Delete("DELETE FROM customer WHERE id = #{id}")
+    boolean deleteById(long id);
 }
