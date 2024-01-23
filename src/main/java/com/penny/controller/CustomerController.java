@@ -29,4 +29,11 @@ public class CustomerController {
     public void registerCustomer(@RequestBody Customer customer){
         customerService.add(customer);
     }
+
+    @PutMapping("{customerId}")
+    public Customer updateCustomer(
+            @PathVariable("customerId") long customerId,
+            @RequestBody Customer customer) {
+        return customerService.update(customerId, customer);
+    }
 }

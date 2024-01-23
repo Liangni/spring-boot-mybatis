@@ -1,5 +1,6 @@
 package com.penny.service;
 
+import com.penny.exception.RequestValidationException;
 import com.penny.exception.ResourceDuplicateException;
 import com.penny.exception.ResourceNotFoundException;
 import com.penny.model.Customer;
@@ -41,5 +42,35 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getByEmail(String email) {
         return customerRepository.findByEmail(email);
+    }
+
+    @Override
+    public Customer update(long id, Customer customer) {
+        String newName = customer.getName();
+        String newEmail = customer.getEmail();
+        int newAge = customer.getAge();
+
+        Customer myCustomer = getById(id);
+        var changes = false;
+        if (newName != null && !myCustomer.getName().equals(newName)) {
+            myCustomer.setName(newName);
+            changes = true;
+        }
+
+        if (newEmail != null && !myCustomer.getEmail().equals(newEmail)) {
+            if (getByEmail(newEmail) != null) throw new ResourceDuplicateException("Email [%s] is duplicated".formatted(newEmail));
+            myCustomer.setEmail(newEmail);
+            changes = true;
+        }
+
+        if(newAge != 0 && myCustomer.getAge() != newAge) {
+            myCustomer.setAge(newAge);
+            changes = true;
+        }
+
+        if (!changes) throw new RequestValidationException("no data changes found");
+
+        customerRepository.update(id, myCustomer.getName(), myCustomer.getEmail(), myCustomer.getAge());
+        return myCustomer;
     }
 }

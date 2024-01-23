@@ -13,4 +13,6 @@ public interface CustomerService
     Customer getById(long id);
 
     Customer getByEmail(String email);
+
+    Customer update(long id, Customer customer);
 }

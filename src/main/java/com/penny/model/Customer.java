@@ -1,5 +1,7 @@
 package com.penny.model;
 
+import java.util.Objects;
+
 public class Customer {
     private long id;
 
@@ -46,6 +48,19 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id == customer.id && age == customer.age && Objects.equals(name, customer.name) && Objects.equals(email, customer.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, age);
     }
 
     @Override
