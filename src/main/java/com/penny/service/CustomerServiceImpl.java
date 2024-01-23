@@ -33,6 +33,17 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer add(Customer customer) {
         String email = customer.getEmail();
+        String name = customer.getName();
+        int age = customer.getAge();
+        // 如何判斷使用者有沒有輸入 age?
+        if (email == null || name == null || age == 0) {
+            throw new RequestValidationException("Name, email and age fields are required");
+        }
+
+        if (age <= 0) {
+            throw new RequestValidationException("Age must be positive integer");
+        }
+
         Customer found = getByEmail(email);
         if (found != null) throw new ResourceDuplicateException("Email [%s] is duplicated".formatted(email));
         customerRepository.insert(customer);
