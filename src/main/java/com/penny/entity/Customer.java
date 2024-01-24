@@ -1,4 +1,4 @@
-package com.penny.model;
+package com.penny.entity;
 
 import java.util.Objects;
 

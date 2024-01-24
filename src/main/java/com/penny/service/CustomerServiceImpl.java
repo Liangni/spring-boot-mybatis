@@ -3,7 +3,7 @@ package com.penny.service;
 import com.penny.exception.RequestValidationException;
 import com.penny.exception.ResourceDuplicateException;
 import com.penny.exception.ResourceNotFoundException;
-import com.penny.model.Customer;
+import com.penny.entity.Customer;
 import com.penny.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 

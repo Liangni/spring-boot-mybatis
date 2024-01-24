@@ -1,6 +1,6 @@
 package com.penny.repository;
 
-import com.penny.model.Customer;
+import com.penny.entity.Customer;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

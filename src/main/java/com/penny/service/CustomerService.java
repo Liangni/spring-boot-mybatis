@@ -1,6 +1,6 @@
 package com.penny.service;
 
-import com.penny.model.Customer;
+import com.penny.entity.Customer;
 
 import java.util.List;
 

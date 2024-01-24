@@ -1,7 +1,9 @@
 package com.penny.controller;
 
-import com.penny.model.Customer;
+import com.penny.entity.Customer;
 import com.penny.service.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +28,10 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void registerCustomer(@RequestBody Customer customer){
+    public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer){
         customerService.add(customer);
+        Customer savedCustomer = customerService.getByEmail(customer.getEmail());
+        return  new ResponseEntity<Customer>(savedCustomer, HttpStatus.CREATED);
     }
 
     @PutMapping("{customerId}")
